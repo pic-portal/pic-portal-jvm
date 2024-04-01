@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     id("org.liquibase.gradle") version "2.2.0" apply true
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6" apply true
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
 }
@@ -44,4 +46,20 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+detekt {
+    buildUponDefaultConfig = true
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "17"
+    reports {
+        xml.required = true
+        html.required = true
+        txt.required = true
+        sarif.required = true
+        md.required = true
+    }
+    basePath = rootDir.absolutePath
 }

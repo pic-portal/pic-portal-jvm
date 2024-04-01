@@ -10,6 +10,7 @@ import org.springframework.boot.runApplication
 @ConfigurationPropertiesScan
 class PicPortalJvmApplication
 
+@SuppressWarnings("SpreadOperator")
 fun main(args: Array<String>) {
     runApplication<PicPortalJvmApplication>(*args)
 }
