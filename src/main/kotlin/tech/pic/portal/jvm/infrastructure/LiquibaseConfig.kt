@@ -7,7 +7,6 @@ import javax.sql.DataSource
 
 @Configuration
 class LiquibaseConfig {
-
     @Bean
     fun liquibase(dataSource: DataSource): SpringLiquibase {
         val liquibase: SpringLiquibase = SpringLiquibase()
