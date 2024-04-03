@@ -31,12 +31,17 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("jakarta.persistence:jakarta.persistence-api")
+
     implementation("org.postgresql:postgresql")
     implementation("org.liquibase:liquibase-core")
     implementation("org.jooq:jooq-codegen:3.19.6")
     implementation("org.jooq:jooq-kotlin:3.19.6")
     implementation("org.jooq:jooq:3.19.6")
+
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
 
     jooqCodegen("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
     jooqCodegen("org.jooq:jooq-meta-extensions:3.19.6")

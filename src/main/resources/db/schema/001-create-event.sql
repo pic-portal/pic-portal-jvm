@@ -13,3 +13,9 @@ CREATE TABLE IF NOT EXISTS event (
 );
 
 --rollback select 1
+
+--changeset event-date:1
+
+ALTER TABLE event ALTER COLUMN event_date TYPE DATE USING event_date::DATE;
+
+--rollback select 1

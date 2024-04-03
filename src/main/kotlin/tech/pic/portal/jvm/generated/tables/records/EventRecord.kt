@@ -4,6 +4,7 @@
 package tech.pic.portal.jvm.generated.tables.records
 
 
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
 
@@ -23,9 +24,9 @@ open class EventRecord() : UpdatableRecordImpl<EventRecord>(Event.EVENT) {
         set(value): Unit = set(0, value)
         get(): UUID? = get(0) as UUID?
 
-    open var eventDate: OffsetDateTime?
+    open var eventDate: LocalDate?
         set(value): Unit = set(1, value)
-        get(): OffsetDateTime? = get(1) as OffsetDateTime?
+        get(): LocalDate? = get(1) as LocalDate?
 
     open var eventName: String?
         set(value): Unit = set(2, value)
@@ -56,7 +57,7 @@ open class EventRecord() : UpdatableRecordImpl<EventRecord>(Event.EVENT) {
     /**
      * Create a detached, initialised EventRecord
      */
-    constructor(id: UUID? = null, eventDate: OffsetDateTime? = null, eventName: String? = null, createdBy: String? = null, createdOn: OffsetDateTime? = null, updatedBy: String? = null, updatedOn: OffsetDateTime? = null): this() {
+    constructor(id: UUID? = null, eventDate: LocalDate? = null, eventName: String? = null, createdBy: String? = null, createdOn: OffsetDateTime? = null, updatedBy: String? = null, updatedOn: OffsetDateTime? = null): this() {
         this.id = id
         this.eventDate = eventDate
         this.eventName = eventName

@@ -7,9 +7,10 @@ import javax.sql.DataSource
 
 @Configuration
 class LiquibaseConfig {
+
     @Bean
     fun liquibase(dataSource: DataSource): SpringLiquibase {
-        val liquibase: SpringLiquibase = SpringLiquibase()
+        val liquibase = SpringLiquibase()
         liquibase.setChangeLog("db/changelog/db.changelog-master.xml")
         liquibase.setDataSource(dataSource)
         return liquibase

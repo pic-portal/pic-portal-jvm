@@ -4,6 +4,7 @@
 package tech.pic.portal.jvm.generated.tables
 
 
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
 
@@ -79,7 +80,7 @@ open class Event(
     /**
      * The column <code>public.event.event_date</code>.
      */
-    val EVENT_DATE: TableField<EventRecord, OffsetDateTime?> = createField(DSL.name("event_date"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "")
+    val EVENT_DATE: TableField<EventRecord, LocalDate?> = createField(DSL.name("event_date"), SQLDataType.LOCALDATE.nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATE)), this, "")
 
     /**
      * The column <code>public.event.event_name</code>.
