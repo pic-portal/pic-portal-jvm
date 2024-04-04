@@ -51,6 +51,7 @@ dependencies {
 
     liquibaseRuntime("org.liquibase:liquibase-core")
     liquibaseRuntime("org.postgresql:postgresql")
+    liquibaseRuntime("info.picocli:picocli:4.6.3")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -86,24 +87,22 @@ detekt {
     buildUponDefaultConfig = true
 }
 
-task("liquibaseUpdate") {
-    doFirst() {
-        liquibase {
-            activities.register("main") {
-                val dbUrl = System.getenv("PSQL_URL")
-                val dbUser = System.getenv("PSQL_USER")
-                val dbPass = System.getenv("PSQL_PASSWORD")
-                this.arguments = mapOf(
-                    "logLevel" to "info",
-                    "changeLogFile" to "src/main/resources/migrations/db.changelog-master.xml",
-                    "url" to dbUrl,
-                    "username" to dbUser,
-                    "password" to dbPass
-                )
-            }
-            runList = "main"
-        }
+liquibase {
+    activities.register("main") {
+        val dbUrl = System.getenv("PSQL_URL")
+        val dbUser = System.getenv("PSQL_USER")
+        val dbPassword = System.getenv("PSQL_PASSWORD")
+        val arguments = mutableMapOf(
+            "logLevel" to "info",
+            "changelogFile" to "src/main/resources/db/changelog-master.xml",
+            "url" to dbUrl,
+            "username" to dbUser
+        )
+
+        if (dbPassword.isNotEmpty()) arguments["password"] = dbPassword
+        this.arguments = arguments
     }
+    runList = "main"
 }
 
 tasks.withType<Detekt>().configureEach {

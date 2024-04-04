@@ -11,7 +11,7 @@ class LiquibaseConfig {
     @Bean
     fun liquibase(dataSource: DataSource): SpringLiquibase {
         val liquibase = SpringLiquibase()
-        liquibase.setChangeLog("db/changelog/db.changelog-master.xml")
+        liquibase.setChangeLog("db/changelog-master.xml")
         liquibase.setDataSource(dataSource)
         return liquibase
     }
