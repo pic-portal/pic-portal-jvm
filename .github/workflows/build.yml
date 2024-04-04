@@ -24,3 +24,7 @@ jobs:
 
       - name: Execute Gradle build
         run: ./gradlew clean build
+        env:
+          PSQL_URL: ${{ secrets.PSQL_URL }}
+          PSQL_USER: ${{ secrets.PSQL_USER }}
+          PSQL_PASSWORD: ${{ secrets.PSQL_PASSWORD }}
