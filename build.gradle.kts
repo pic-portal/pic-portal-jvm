@@ -2,6 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.tasks.KtLintCheckTask
 import org.jlleitschuh.gradle.ktlint.tasks.KtLintFormatTask
+import org.jooq.codegen.gradle.CodegenTask
 import org.jooq.meta.jaxb.Jdbc
 
 plugins {
@@ -85,6 +86,26 @@ detekt {
     buildUponDefaultConfig = true
 }
 
+task("liquibaseUpdate") {
+    doFirst() {
+        liquibase {
+            activities.register("main") {
+                val dbUrl = System.getenv("PSQL_URL")
+                val dbUser = System.getenv("PSQL_USER")
+                val dbPass = System.getenv("PSQL_PASSWORD")
+                this.arguments = mapOf(
+                    "logLevel" to "info",
+                    "changeLogFile" to "src/main/resources/migrations/db.changelog-master.xml",
+                    "url" to dbUrl,
+                    "username" to dbUser,
+                    "password" to dbPass
+                )
+            }
+            runList = "main"
+        }
+    }
+}
+
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "17"
     reports {
@@ -133,4 +154,8 @@ jooq {
             }
         }
     }
+}
+
+tasks.withType<CodegenTask> {
+    dependsOn("liquibaseUpdate")
 }
